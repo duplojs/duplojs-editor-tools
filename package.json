@@ -6,11 +6,11 @@
   "repository": "https://github.com/duplojs/duplojs-editor-tools",
   "license": "ISC",
   "keywords": [],
-  "types": "./types/scripts/.ts",
+  "types": "./types/index.ts",
   "exports": {
     "default": {
-      "import": "./dist/.mjs",
-      "require": "./dist/.cjs"
+      "import": "./dist/editorTools.mjs",
+      "require": "./dist/editorTools.cjs"
     }
   },
   "files": [
