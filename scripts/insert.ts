@@ -33,10 +33,6 @@ export interface Inserting{
     (name: "after_abstract_route", code: string, arg1?: unknown, arg2?: unknown): void;
     (name: "after_drop_abstract_route", code: string, arg1?: unknown, arg2?: unknown): void;
 
-    (name: "before_access", code: string, arg1?: unknown, arg2?: unknown): void;
-    (name: "after_access", code: string, arg1?: unknown, arg2?: unknown): void;
-    (name: "after_drop_access", code: string, arg1?: unknown, arg2?: unknown): void;
-
     (name: "before_hook_before_parsing_body", code: string, arg1?: unknown, arg2?: unknown): void;
     (name: "after_hook_before_parsing_body", code: string, arg1?: unknown, arg2?: unknown): void;
     (name: "after_parsing_body", code: string, arg1?: unknown, arg2?: unknown): void;
@@ -156,10 +152,6 @@ export type BlockNames = "first_line" |
 	"before_abstract_route" |
 	"after_abstract_route" |
 	"after_drop_abstract_route" |
-
-	"before_access" |
-	"after_access" |
-	"after_drop_access" |
 
 	"before_hook_before_parsing_body" |
 	"after_hook_before_parsing_body" |
