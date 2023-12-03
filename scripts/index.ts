@@ -12,7 +12,7 @@ export function duploInjector<
 		object: duploses,
 		insert: Inserting,
 	) => void,
-	withoutBuild?: true
+	withoutRebuild?: boolean
 ){
 	duploses.editingFunctions.push(object => {
 		editingFunction(
@@ -23,7 +23,7 @@ export function duploInjector<
 			}
 		);		
 	});
-	if(withoutBuild !== true) duploses.build();
+	if(withoutRebuild !== true) duploses.build();
 }
 
 export function duploExtend(duploses: Route | ProcessExport | AbstractRoute, extend: Record<any, any>){
