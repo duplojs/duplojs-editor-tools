@@ -1,11 +1,11 @@
-import Duplo, {zod} from "@duplojs/duplojs";
+import Duplo from "@duplojs/duplojs";
 import {parentPort} from "worker_threads";
-import {duploExtend, duploFindManyDesc, duploInjector} from "../../scripts/index";
+import {duploExtends, duploFindManyDesc, duploInjector} from "../../scripts/index";
 
 const duplo = Duplo({port: 1506, host: "localhost"});
 
 duplo.addHook("onDeclareRoute", (route) => {
-	duploExtend(route, {
+	duploExtends(route, {
 		parentPort
 	});
 
