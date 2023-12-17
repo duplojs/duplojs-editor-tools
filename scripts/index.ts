@@ -1,8 +1,9 @@
 import {AbstractRoute, DescriptionAll, ProcessExport, Route} from "@duplojs/duplojs";
-import {injectors, inject} from "./insert";
-import type {BlockNames, Inserting} from "./insert";
+import {injectors} from "./insert";
+export {inject} from "./insert";
+import type {Inserting} from "./insert";
+export type {BlockNames, Inserting} from "./insert";
 
-export {BlockNames, Inserting, inject};
 
 export function duploInjector<
 	duploses extends Route | ProcessExport | AbstractRoute
@@ -12,7 +13,7 @@ export function duploInjector<
 		object: duploses,
 		insert: Inserting,
 	) => void,
-	withoutRebuild?: boolean
+	withoutBuild?: boolean
 ){
 	duploses.editingFunctions.push(object => {
 		editingFunction(
@@ -23,10 +24,10 @@ export function duploInjector<
 			}
 		);		
 	});
-	if(withoutRebuild !== true) duploses.build();
+	if(withoutBuild !== true) duploses.build();
 }
 
-export function duploExtend(duploses: Route | ProcessExport | AbstractRoute, extend: Record<any, any>){
+export function duploExtends(duploses: Route | ProcessExport | AbstractRoute, extend: Record<any, any>){
 	Object.entries(extend).forEach(([key, value]) => duploses.extends[key] = value);
 }
 
