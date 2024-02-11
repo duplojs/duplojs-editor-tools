@@ -1,4 +1,5 @@
 # duplojs-editor-tools
+[![NPM version](https://img.shields.io/npm/v/@duplojs/editor-tools)](https://www.npmjs.com/package/@duplojs/editor-tools)
 
 ## Instalation
 ```
