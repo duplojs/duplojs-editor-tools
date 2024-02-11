@@ -1,16 +1,16 @@
 {
-  "name": "@duplojs/editor-tools",
+  "name": "@duplojs/",
   "version": "0.0.0",
   "author": "mathcovax",
   "description": "",
-  "repository": "https://github.com/duplojs/duplojs-editor-tools",
+  "repository": "https://github.com/duplojs/{toReplace}",
   "license": "ISC",
   "keywords": [],
-  "types": "./types/index.ts",
+  "types": "./types/scripts/.ts",
   "exports": {
     "default": {
-      "import": "./dist/editorTools.mjs",
-      "require": "./dist/editorTools.cjs"
+      "import": "./dist/.mjs",
+      "require": "./dist/.cjs"
     }
   },
   "files": [
@@ -23,8 +23,7 @@
   "scripts": {
     "build": "rollup --config && npx tsc -p tsconfig.build.json",
 	"test:e2e": "node --require sucrase/register test",
-	"test:types": "tsc",
-	"generate:type": "node --require sucrase/register scripts/generateType.ts"
+	"test:types": "tsc"
   },
   "dependencies": {
     "@duplojs/duplojs": ">=1.0.0 <2.0.0"

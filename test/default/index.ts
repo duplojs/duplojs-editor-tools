@@ -1,3 +1,4 @@
+import {zod} from "@duplojs/duplojs";
 import {workerTesting} from "@duplojs/worker-testing";
 
 export default workerTesting(
@@ -13,7 +14,6 @@ export default workerTesting(
 				info: "s",
 			}
 		},
-
 		{
 			title: "double insert",
 			url: "http://localhost:1506/test/2",
@@ -22,6 +22,16 @@ export default workerTesting(
 			response: {
 				code: 200,
 				info: "s",
+			}
+		},
+		{
+			title: "insert try catch",
+			url: "http://localhost:1506/test/3",
+			method: "GET",
+			response: {
+				code: 500,
+				info: "error",
+				body: zod.literal("this is a super error")
 			}
 		},
 	]
