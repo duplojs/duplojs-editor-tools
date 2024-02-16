@@ -25,7 +25,7 @@ interface InjectObject {
 }
 
 export function duploInject<
-	_duplose extends Route | Process | AbstractRoute
+	_duplose extends Route | Process | AbstractRoute | MergeAbstractRoute
 >(
 	duplose: _duplose, 
 	editingFunction: (
@@ -62,7 +62,7 @@ export function duploInject<
 }
 
 export function duploExtends(
-	duploses: Route | Process | AbstractRoute, 
+	duploses: Route | Process | AbstractRoute | MergeAbstractRoute, 
 	extensions: Record<any, any>
 ){
 	Object.entries(extensions).forEach(([key, value]) => {
@@ -71,7 +71,7 @@ export function duploExtends(
 }
 
 export function duploFindManyDesc(
-	duploses: Route | Process | AbstractRoute, 
+	duploses: Route | Process | AbstractRoute | MergeAbstractRoute, 
 	find: (value: any) => boolean,
 	type?: DescriptionAll["type"],
 ){
