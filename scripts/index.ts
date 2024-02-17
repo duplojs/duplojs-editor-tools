@@ -179,5 +179,5 @@ export function extractAbstractRoute<
 	
 	return abstractRouteUseFunction instanceof AbstractRouteInstance 
 		? abstractRouteUseFunction.subAbstractRoute.parent
-		: abstractRouteUseFunction().subAbstractRoute.parent;
+		: abstractRouteUseFunction.abstractRoute;
 }
