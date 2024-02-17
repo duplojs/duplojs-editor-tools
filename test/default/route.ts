@@ -18,6 +18,10 @@ duplo.addHook("onDeclareRoute", (route) => {
 			code("first_line_first_try", /* js */`
 				this.extensions.parentPort?.postMessage("first line first try!");
 			`);
+
+			code("first_line_first_try", /* js */`
+				this.extensions.parentPort?.postMessage("first line first try double!");
+			`);
 		}
 
 		if(duploFindManyDesc(route, v => v === "first")){

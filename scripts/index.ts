@@ -1,26 +1,37 @@
 import {Route, Process, AbstractRoute, DescriptionAll, DuploInstance, DuploConfig, Checker, MergeAbstractRoute, Duplose, AbstractRouteUseFunction, AbstractRouteInstance} from "@duplojs/duplojs";
 import {BlockName} from "./__types";
 
-export const inject = (stringFunction: string, name: string, code: string) => stringFunction.replace(
+type InjectWhere = "first" | "last" | "top" | "bottom";
+
+export const inject = (
+	stringFunction: string, 
+	name: string, 
+	code: string, 
+	where: InjectWhere = "last",
+) => stringFunction.replace(
 	new RegExp(`\\/\\* ${name} \\*\\/([^]*)`),
 	(match, g1) => {
 		const [block, afterBlock] = g1.split(/\/\* end_block \*\/([^]*)/s);
 		return `
-            /* first_line */
+			${where == "top" ? code : ""}
+            /* ${name} */
+			${where == "first" ? code : ""}
             ${block}
-			${code}
+			${where == "last" ? code : ""}
             /* end_block */
+			${where == "bottom" ? code : ""}
             ${afterBlock}
         `;
 	}
 );
 
 interface InjectObject {
-	code(name: BlockName, code: string): void;
+	code(name: BlockName, code: string, where?: InjectWhere): void;
 	tryCatch(
 		nameStart: BlockName, 
 		nameEnd: BlockName, 
-		code: string
+		code: string,
+		where?: `${InjectWhere}-${InjectWhere}`
 	): void;
 }
 
@@ -36,23 +47,27 @@ export function duploInject<
 	duplose.editingDuploseFunctions.push(() => {
 		editingFunction(
 			{
-				code(name, code){
+				code(name, code, where){
 					duplose.stringDuploseFunction = inject(
 						duplose.stringDuploseFunction,
 						name,
-						code
+						code,
+						where
 					);
 				},
-				tryCatch(nameStart, nameEnd, code){
+				tryCatch(nameStart, nameEnd, code, where){
+					const [whereStart, whereEnd] = where?.split("-") as (InjectWhere[] | undefined) || ["first", "last"];
 					duplose.stringDuploseFunction = inject(
 						duplose.stringDuploseFunction,
 						nameStart,
-						"try{"
+						"try{", 
+						whereStart
 					);
 					duplose.stringDuploseFunction = inject(
 						duplose.stringDuploseFunction,
 						nameEnd,
-						`}catch(injectError){\n${code}\n}`
+						`}catch(injectError){\n${code}\n}`,
+						whereEnd
 					);
 				},
 			},
@@ -71,7 +86,7 @@ export function duploExtends(
 }
 
 export function duploFindManyDesc(
-	duploses: Route | Process | AbstractRoute | MergeAbstractRoute, 
+	duploses: Route | Process | AbstractRoute | MergeAbstractRoute | Checker, 
 	find: (value: any) => boolean,
 	type?: DescriptionAll["type"],
 ){

@@ -27,7 +27,7 @@
 	"generate:type": "node --require sucrase/register scripts/generateType.ts"
   },
   "dependencies": {
-    "@duplojs/duplojs": ">=1.0.0 <2.0.0"
+    "@duplojs/duplojs": ">=1.1.8 <2.0.0"
   },
   "devDependencies": {
     "@duplojs/worker-testing": "^0.2.6",
