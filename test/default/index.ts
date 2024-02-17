@@ -8,7 +8,11 @@ export default workerTesting(
 			title: "insert",
 			url: "http://localhost:1506/test/1",
 			method: "GET",
-			output: ["first line !", "first line first try!"],
+			output: [
+				"first line !",
+				"first line first try!",
+				"first line first try double!"
+			],
 			response: {
 				code: 200,
 				info: "s",
@@ -18,7 +22,12 @@ export default workerTesting(
 			title: "double insert",
 			url: "http://localhost:1506/test/2",
 			method: "GET",
-			output: ["first line !", "double first", "first line first try!"],
+			output: [
+				"first line !", 
+				"double first",
+				"first line first try!",
+				"first line first try double!"
+			],
 			response: {
 				code: 200,
 				info: "s",
