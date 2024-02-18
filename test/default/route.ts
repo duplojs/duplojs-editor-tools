@@ -30,6 +30,12 @@ duplo.addHook("onDeclareRoute", (route) => {
 			`);
 		}
 
+		if(duploFindManyDesc(route, v => v === "cut")){
+			code("before_step_[0]", /* js */`
+				this.extensions.parentPort?.postMessage("cut step");
+			`);
+		}
+
 		if(duploFindManyDesc(route, v => v === "try")){
 			tryCatch(
 				"before_handler",
@@ -51,6 +57,12 @@ duplo.declareRoute("GET", "/test/2", "first")
 duplo.declareRoute("GET", "/test/3", "try")
 .handler(({}, res) => {
 	throw new Error();
+});
+
+duplo.declareRoute("GET", "/test/4")
+.cut(() => {}, undefined, "cut")
+.handler(({}, res) => {
+	res.code(200).info("s").send();
 });
 
 duplo.launch(() => parentPort?.postMessage("ready"));
