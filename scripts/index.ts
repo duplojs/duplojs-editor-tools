@@ -9,7 +9,7 @@ export const inject = (
 	code: string, 
 	where: InjectWhere = "last",
 ) => stringFunction.replace(
-	new RegExp(`\\/\\* ${name} \\*\\/([^]*)`),
+	new RegExp(`\\/\\* ${name.replace(/(\[|\])/g, m => `\\${m}`)} \\*\\/([^]*)`),
 	(match, g1) => {
 		const [block, afterBlock] = g1.split(/\/\* end_block \*\/([^]*)/s);
 		return `

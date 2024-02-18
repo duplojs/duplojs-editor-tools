@@ -43,5 +43,15 @@ export default workerTesting(
 				body: zod.literal("this is a super error")
 			}
 		},
+		{
+			title: "insert cut step",
+			url: "http://localhost:1506/test/4",
+			method: "GET",
+			output: ["cut step"],
+			response: {
+				code: 200,
+				info: "s"
+			}
+		},
 	]
 );
