@@ -1,6 +1,6 @@
 import Duplo from "@duplojs/duplojs";
 import {parentPort} from "worker_threads";
-import {duploExtends, duploFindManyDesc, duploInject} from "../../scripts/index";
+import {CacheFolder, duploExtends, duploFindManyDesc, duploInject} from "../../scripts/index";
 
 const duplo = Duplo({port: 1506, host: "localhost", environment: "DEV"});
 
@@ -64,5 +64,7 @@ duplo.declareRoute("GET", "/test/4")
 .handler(({}, res) => {
 	res.code(200).info("s").send();
 });
+
+parentPort?.postMessage(new CacheFolder("test").path);
 
 duplo.launch(() => parentPort?.postMessage("ready"));

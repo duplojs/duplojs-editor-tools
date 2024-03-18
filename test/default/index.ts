@@ -53,5 +53,6 @@ export default workerTesting(
 				info: "s"
 			}
 		},
-	]
+	],
+	[`${process.cwd()}/node_modules/.duplojs/test`]
 );
