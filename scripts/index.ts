@@ -1,5 +1,6 @@
 import {Route, Process, AbstractRoute, DescriptionAll, DuploInstance, DuploConfig, Checker, MergeAbstractRoute, Duplose, AbstractRouteUseFunction, AbstractRouteInstance} from "@duplojs/duplojs";
 import {BlockName} from "./__types";
+export {CacheFolder} from "./cahce";
 
 type InjectWhere = "first" | "last" | "top" | "bottom";
 
@@ -176,7 +177,6 @@ export function onUseDuplose(instance: DuploInstance<DuploConfig>, options?: OnU
 export function extractAbstractRoute<
 	_abstractRouteUseFunction extends AbstractRouteUseFunction<any, any, any, any, any> | AbstractRouteInstance
 >(abstractRouteUseFunction: _abstractRouteUseFunction){
-	
 	return abstractRouteUseFunction instanceof AbstractRouteInstance 
 		? abstractRouteUseFunction.subAbstractRoute.parent
 		: abstractRouteUseFunction.abstractRoute;
