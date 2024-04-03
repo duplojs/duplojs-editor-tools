@@ -1,16 +1,27 @@
-import {existsSync} from "fs";
+import {existsSync, mkdirSync} from "fs";
 import {resolve} from "path";
 
 export class CacheFolder{
+	private static readonly mainCacheFolderName = ".duplojs";
+	private static nodeModulesPath?: string;
+
 	readonly path: string;
 
 	constructor(name: string){
-		this.path = resolve(this.getNodeModulesPath(), this.mainCacheFolderName, name);
+		this.path = resolve(CacheFolder.getNodeModulesPath(), CacheFolder.mainCacheFolderName, name);
 	}
 
-	readonly mainCacheFolderName = ".duplojs";
-	private nodeModulesPath?: string;
-	private getNodeModulesPath(){
+	init(){
+		mkdirSync(this.path, {recursive: true});
+
+		return this;
+	}
+
+	static create(name: string){
+		return new CacheFolder(name).init().path;
+	}
+
+	private static getNodeModulesPath(){
 		return this.nodeModulesPath 
 			|| (
 				this.nodeModulesPath = (
